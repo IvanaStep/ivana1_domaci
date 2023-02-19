@@ -7,13 +7,13 @@ const credentials={
     email:"testing@gmail.com",
     password: "nekonesto11"
 };
-describe("all galleries page test",()=>{
+describe("All galleries page test",()=>{
     beforeEach("visit app and login",()=>{
         cy.visit("/login");
         login.login(credentials.email,credentials.password);
         cy.url().should("not.include","/login")
     });
-    it("loads page succesfuly",()=>{
+    it("Loads page succesfuly",()=>{
         cy.url().should("include","/");
         allGalleries.AllGalleriesHeading
            .should("contain.text","All Galleries")
@@ -38,7 +38,7 @@ describe("all galleries page test",()=>{
         
     })
 
-    it("test search",()=>{
+    it("Test search",()=>{
         let searchTerm="Gallery with 2 images";
         allGalleries.search(searchTerm);
         allGalleries.allGalleries
@@ -54,7 +54,7 @@ describe("all galleries page test",()=>{
            
     })
 
-    it("test pagination",()=>{
+    it("Test pagination",()=>{
         allGalleries.allGalleries
           .should("be.visible")
           .and("have.length",10);
@@ -68,13 +68,13 @@ describe("all galleries page test",()=>{
           .and("have.length",30);
     })
 
-    it("click on gallery title redirects to single gallery page",()=>{
+    it("Click on gallery title redirects to single gallery page",()=>{
         allGalleries.singleGallery
           .find("a")
           .first()
           .click();
     })
-    it("click on gallery author redirects to authors page",()=>{
+    it("Click on gallery author redirects to authors page",()=>{
         allGalleries.singleGallery
           .find("a")
           .eq(1)

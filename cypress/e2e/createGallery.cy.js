@@ -17,7 +17,7 @@ let galleryData={
     imageUrl: faker.image.imageUrl()+".jpg",
     wrongImageUrl:"http://i497.photobucket.com/albums/rr335/troponje/48.gif",
 }
-describe("create gallery test",()=>{
+describe("Create gallery test",()=>{
     beforeEach("visit app and log in",()=>{
         cy.visit("/login");
         login.login(credentials.email,credentials.password);
@@ -44,7 +44,7 @@ describe("create gallery test",()=>{
         })
  
 
-    it.only("Create gallery with wrong URL extension",()=>{
+    it("Create gallery with wrong URL extension",()=>{
       createGallery.creteGalleryLink.click();
         createGallery.createGalleryHeading
            .should("be.visible")

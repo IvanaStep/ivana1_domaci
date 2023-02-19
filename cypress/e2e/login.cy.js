@@ -14,7 +14,7 @@ const credentials={
 
 }
 
-describe("login tests",()=>{
+describe("Login tests",()=>{
     beforeEach("visit app and click the login link",()=>{   
         cy.visit("/");
         login.loginLink.click();
@@ -24,12 +24,12 @@ describe("login tests",()=>{
           .and("have.text","Please login");
     })
 
-    it("login with valid credentials",()=>{
+    it("Login with valid credentials",()=>{
         login.login(credentials.validEmail,credentials.validPass);
         cy.url().should("contain","/login")    
     })
 
-    it("login with invalid email adress",()=>{
+    it("Login with invalid email adress",()=>{
         login.login(credentials.invalidEmail,credentials.validPass);
         login.errorMessage
           .should("be.visible")
@@ -38,7 +38,7 @@ describe("login tests",()=>{
           .and("have.class","alert-danger");
     })
 
-    it("login with invalid password",()=>{
+    it("Login with invalid password",()=>{
         login.login(credentials.validEmail,credentials.invalidPass);
         login.errorMessage
         .should("be.visible")
@@ -46,19 +46,19 @@ describe("login tests",()=>{
         .and("have.class","alert alert-danger");
     })
 
-    it("login without credentials",()=>{
+    it("Login without credentials",()=>{
         login.loginLink.click();
         login.submitButton.click();
         cy.url().should("include","/login");
     })
 
-    it("login with incomplete email",()=>{
+    it("Login with incomplete email",()=>{
         login.login(credentials.incompleteEmail,credentials.validPass);
         login.submitButton.click();
         cy.url().should("include","/login")
     })
 
-    it("login with incomplete password",()=>{
+    it("Login with incomplete password",()=>{
         login.login(credentials.validEmail,credentials.incompletePass);
         login.errorMessage
           .should("be.visible")
@@ -66,7 +66,7 @@ describe("login tests",()=>{
           .and("have.class","alert alert-danger")
           .and("have.css","border-color","rgb(245, 198, 203)");
     })
-    it("login with email without dot",()=>{
+    it("Login with email without dot",()=>{
         login.login(credentials.mailWithoutDot,credentials.validPass);
         login.errorMessage
           .should("be.visible")
