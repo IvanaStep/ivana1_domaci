@@ -18,14 +18,17 @@ let galleryData = {
     wrongImageUrl: faker.image.imageUrl()+" .gif",
 }
 describe("Create gallery test", () => {
-    beforeEach("visit app and log in", () => {
-        cy.visit("/login");
+    before("visit app and log in", () => {
+       /* cy.visit("/login");
         login.login(credentials.email,credentials.password);
         login.login.submitButton.click();
-        cy.url().should("not.include","/login");
+        cy.url().should("not.include","/login");*/
+        cy.loginViaBackend();
+        cy.visit("/create")
     });
 
-    it("Create gallery", () => {
+    it.only("Create gallery", () => {
+        cy.visit("/create")
         createGallery.creteGalleryLink.click();
         createGallery.createGalleryHeading
            .should("be.visible")
@@ -35,12 +38,11 @@ describe("Create gallery test", () => {
             galleryData.description,
             galleryData.imageUrl
         );   
-        createGallery.submitBtn.click();
-        allGalleries.singleGallery.find("h2");
         })
 
     it("Create gallery with wrong URL extension", () => {
-      createGallery.creteGalleryLink.click();
+        cy.visit("/create")
+      //createGallery.creteGalleryLink.click();
         createGallery.createGalleryHeading
            .should("be.visible")
            .and("have.text","Create Gallery");

@@ -5,7 +5,7 @@ class CreateGallery{
     }
  
     get creteGalleryLink(){
-     return cy.get(".nav-link").eq(2)
+     return cy.get("a[href='/create']")
     }
  
     get galleryTitleInput(){

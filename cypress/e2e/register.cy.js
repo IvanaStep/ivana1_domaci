@@ -1,6 +1,7 @@
 // <reference types="Cypress" />
 import { registerPage } from "../page_objects/registerPage";
 import { faker } from '@faker-js/faker';
+import { login } from "../page_objects/loginPage";
 
 describe("Register Form Tests", () => {
     let userData = {
@@ -178,5 +179,5 @@ describe("Register Form Tests", () => {
                .and("have.text","The email has already been taken.The terms and conditions must be accepted.")
                .and("have.css", "color","rgb(114, 28, 36)")
           })
-
     })
+    

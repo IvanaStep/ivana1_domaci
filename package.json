@@ -1,15 +1,23 @@
 {
   "name": "poludicu",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
-    "test":  "./node_modules/.bin/cypress open"
+    "test": "cypress open"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@faker-js/faker": "^7.6.0",
-    "cypress": "^12.5.1"
-  }
+    "cypress": "^12.6.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IvanaStep/ivana1_domaci.git"
+  },
+  "bugs": {
+    "url": "https://github.com/IvanaStep/ivana1_domaci/issues"
+  },
+  "homepage": "https://github.com/IvanaStep/ivana1_domaci#readme",
+  "description": ""
 }

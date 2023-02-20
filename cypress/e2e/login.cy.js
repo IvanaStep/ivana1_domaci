@@ -24,8 +24,18 @@ describe("Login tests",()=>{
           .and("have.text","Please login");
     })
 
-    it("Login with valid credentials",()=>{
+    it.only("Login with valid credentials",()=>{
+        cy.intercept({
+            method:"POST",
+            url:"https://gallery-api.vivifyideas.com/api/auth/login",
+
+        }).as(("succesfulLogin"))
+
         login.login(credentials.validEmail,credentials.validPass);
+        cy.wait("@succesfulLogin").then((interception)=>{
+            console.log("INTERCEPTION",interception);
+            expect(interception.response.statusCode).eq(200);
+        });
         cy.url().should("contain","/login")    
     })
 

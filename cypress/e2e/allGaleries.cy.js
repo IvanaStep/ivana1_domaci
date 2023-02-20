@@ -1,4 +1,4 @@
-/// reference types="Cypress"/>
+/// <reference types="Cypress"/>
 
 import { login } from "../page_objects/loginPage";
 import { allGalleries } from "../page_objects/allGalleriesPage";
@@ -12,7 +12,8 @@ describe("All galleries page test",() => {
         cy.visit("/login");
         login.login(credentials.email,credentials.password);
         cy.url().should("not.include","/login")
-    });
+        
+        })
 
     it("Loads page succesfuly",() => {
         cy.url().should("include","/");
