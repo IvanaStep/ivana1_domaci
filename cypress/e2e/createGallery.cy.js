@@ -10,41 +10,36 @@ let credentials={
     password: "nekonesto11",
 };
 
-let galleryData={
+let galleryData = {
     title: "nesto",
     titleShort: faker.lorem.word(1),
     description: faker.lorem.paragraph(),
     imageUrl: faker.image.imageUrl()+".jpg",
-    wrongImageUrl:"http://i497.photobucket.com/albums/rr335/troponje/48.gif",
+    wrongImageUrl: faker.image.imageUrl()+" .gif",
 }
-describe("Create gallery test",()=>{
-    beforeEach("visit app and log in",()=>{
+describe("Create gallery test", () => {
+    beforeEach("visit app and log in", () => {
         cy.visit("/login");
         login.login(credentials.email,credentials.password);
-        login.submitButton.click();
+        login.login.submitButton.click();
         cy.url().should("not.include","/login");
-       
     });
 
-    it("Create gallery",()=>{
+    it("Create gallery", () => {
         createGallery.creteGalleryLink.click();
         createGallery.createGalleryHeading
            .should("be.visible")
            .and("have.text","Create Gallery");
-
         createGallery.createGallery(
             galleryData.title,
             galleryData.description,
             galleryData.imageUrl
-        )   
-        createGallery.addImageBtn.click();
+        );   
         createGallery.submitBtn.click();
-
-       allGalleries.singleGallery.find("h2")
+        allGalleries.singleGallery.find("h2");
         })
- 
 
-    it("Create gallery with wrong URL extension",()=>{
+    it("Create gallery with wrong URL extension", () => {
       createGallery.creteGalleryLink.click();
         createGallery.createGalleryHeading
            .should("be.visible")
@@ -78,10 +73,5 @@ describe("Create gallery test",()=>{
            .should("be.visible")
            .and("have.text","The title must be at least 2 characters.")
            .and("have.css", "background-color","rgb(248, 215, 218)")
- 
     })    
-
-    
- 
-    })    
-
+ })    
