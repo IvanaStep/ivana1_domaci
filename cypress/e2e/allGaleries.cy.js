@@ -7,13 +7,13 @@ const credentials = {
     email : "testing@gmail.com",
     password : "nekonesto11",
 };
+
 describe("All galleries page test",() => {
     beforeEach("visit app and login",() => {
         cy.visit("/login");
         login.login(credentials.email,credentials.password);
         cy.url().should("not.include","/login")
-        
-        })
+    })
 
     it("Loads page succesfuly",() => {
         cy.url().should("include","/");

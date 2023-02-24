@@ -19,5 +19,8 @@
     "url": "https://github.com/IvanaStep/ivana1_domaci/issues"
   },
   "homepage": "https://github.com/IvanaStep/ivana1_domaci#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "prettier": "^2.8.4"
+  }
 }

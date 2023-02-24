@@ -28,7 +28,6 @@ describe("Login tests",()=>{
         cy.intercept({
             method:"POST",
             url:"https://gallery-api.vivifyideas.com/api/auth/login",
-
         }).as(("succesfulLogin"))
 
         login.login(credentials.validEmail,credentials.validPass);

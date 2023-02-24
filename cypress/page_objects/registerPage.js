@@ -49,5 +49,13 @@ class RegisterPage {
     registerWithoutAnyInputFilled(){
         this.submitButton.click()
     }
+    registerWithoutFirstName(lastName,email,password,passwordConfirmation){
+        this.lastName.type(lastName);
+        this.emailInput.type(email);
+        this.passwordInput.type(password);
+        this.passwordConfirmation.type(password);
+        this.tosCheckbox.check();
+        this.submitButton.click();
+    }
 }
 export const registerPage = new RegisterPage();

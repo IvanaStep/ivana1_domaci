@@ -20,7 +20,7 @@ class AllGalleries{
     }
 
     get singleGallery(){
-        return cy.get(".cell");
+        return cy.get(".title-style");
     }
     
     get singleGalleryHeading(){

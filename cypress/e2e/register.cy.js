@@ -52,6 +52,7 @@ describe("Register Form Tests", () => {
              .and("not.be.disabled");
       registerPage.submitButton.click();
     });
+    
     it("Register with password without number",()=>{
       registerPage.registerWithValidData(
         userData.firstName,

@@ -4,6 +4,7 @@ import { login } from "../page_objects/loginPage";
 import { createGallery } from "../page_objects/createGalleryPage";
 import { allGalleries } from "../page_objects/allGalleriesPage";
 import{faker} from "@faker-js/faker";
+import {prettier} from "prettier"
 
 let credentials={
     email: "testing@gmail.com",
@@ -18,7 +19,7 @@ let galleryData = {
     wrongImageUrl: faker.image.imageUrl()+" .gif",
 }
 describe("Create gallery test", () => {
-    before("visit app and log in", () => {
+    beforeEach("visit app and log in", () => {
        /* cy.visit("/login");
         login.login(credentials.email,credentials.password);
         login.login.submitButton.click();
@@ -27,7 +28,7 @@ describe("Create gallery test", () => {
         cy.visit("/create")
     });
 
-    it.only("Create gallery", () => {
+    it("Create gallery", () => {
         cy.visit("/create")
         createGallery.creteGalleryLink.click();
         createGallery.createGalleryHeading
@@ -37,12 +38,16 @@ describe("Create gallery test", () => {
             galleryData.title,
             galleryData.description,
             galleryData.imageUrl
-        );   
+        );  
+        
+        allGalleries.singleGallery
+        .find("h2")
+        .should("have.text", galleryData.title) 
         })
 
     it("Create gallery with wrong URL extension", () => {
         cy.visit("/create")
-      //createGallery.creteGalleryLink.click();
+        createGallery.creteGalleryLink.click();
         createGallery.createGalleryHeading
            .should("be.visible")
            .and("have.text","Create Gallery");
