@@ -3,16 +3,15 @@
 import { login } from "../page_objects/loginPage";
 import { Faker } from "@faker-js/faker";
 
-const credentials={
-    validEmail:"testing@gmail.com",
-    validPass:"nekonesto11",
-    incompleteEmail:"nekonesto.com",
-    mailWithoutDot: "testing@mailcom", 
-    incompletePass:"nekonesto",
-    invalidEmail: "zasto@ydr.com",
+const credentials = {
+    validEmail:"iivanastepanovic1@gmail.com",
+    validPass:"poludicu12",
+    incompleteEmail:"iivanastepanovic1.com",
+    mailWithoutDot: "iivanastepanovic1@mailcom", 
+    incompletePass:"poludicu",
+    invalidEmail: "zasto@gmail.com",
     invalidPass: "zato0123",
-
-}
+};
 
 describe("Login tests",() => {
     beforeEach("visit app and click the login link",() => {   
@@ -22,20 +21,22 @@ describe("Login tests",() => {
         login.loginPageHeading
           .should("be.visible")
           .and("have.text","Please login");
-    })
+    });
 
     it("Login through backend",() => {
         cy.intercept({
             method:"POST",
             url:"https://gallery-api.vivifyideas.com/api/auth/login",
-        }).as(("successfulLogin"));
+        }).as("successfulLogin");
+
         cy.visit("/login")
-        login.login(credentials.validEmail,credentials.validPass)
-       
+
+        login.login(credentials.validEmail,credentials.validPass);
 
         cy.wait("@successfulLogin").then((interception) => {
             expect(interception.response.statusCode).eq(200);
         });
+
         cy.url().should("contain","/login")    
     });
 
@@ -43,24 +44,29 @@ describe("Login tests",() => {
         cy.intercept({
             method: "POST",
             url: "https://gallery-api.vivifyideas.com/api/auth/login",
-        }).as(("loginWithInvalidEmail"));
+        }).as("loginWithInvalidEmail");
+
         login.login(credentials.invalidEmail,credentials.validPass);
+
         cy.visit("/login");
+
         cy.wait("@loginWithInvalidEmail").then((interception) => {
             expect(interception.response.statusCode).eq(401);
-        })
-        
-    })
+        });
+    });
 
     it("Login with invalid password",() => {
         cy.intercept({
             method: "POST",
             url: "https://gallery-api.vivifyideas.com/api/auth/login",
-        }).as(("loginWithInvalidPass"));
+        }).as("loginWithInvalidPass");
+
         login.login(credentials.validEmail,credentials.invalidPass);
+
         cy.wait("@loginWithInvalidPass").then((interception) => {
             expect(interception.response.statusCode).eq(401)
-        })
+        });
+
         login.errorMessage
         .should("be.visible")
         .and("have.text", "Bad Credentials")
@@ -71,11 +77,14 @@ describe("Login tests",() => {
         cy.intercept({
             method: "POST",
             url: "https://gallery-api.vivifyideas.com/api/auth/login",
-        }).as(("loginWithIncompletePass"));
+        }).as("loginWithIncompletePass");
+
         login.login(credentials.validEmail,credentials.incompletePass);
+
         cy.wait("@loginWithIncompletePass").then((interception) => {
             expect(interception.response.statusCode).eq(401)
-        })
+        });
+
         login.errorMessage
           .should("be.visible")
           .and("have.text", "Bad Credentials")
@@ -83,15 +92,18 @@ describe("Login tests",() => {
           .and("have.css","border-color","rgb(245, 198, 203)");
     })
 
-    it("Login with email without dot",()=>{
+    it("Login with email without dot",() => {
         cy.intercept({
             method: "POST",
             url: "https://gallery-api.vivifyideas.com/api/auth/login",
-        }).as(("loginWithEmailWithoutDot"));
+        }).as("loginWithEmailWithoutDot");
+
         login.login(credentials.mailWithoutDot,credentials.validPass);
+
         cy.wait("@loginWithEmailWithoutDot").then((interception) => {
             expect(interception.response.statusCode).eq(401)
-        })
+        });
+        
         login.errorMessage
           .should("be.visible")
           .and("have.text", "Bad Credentials")

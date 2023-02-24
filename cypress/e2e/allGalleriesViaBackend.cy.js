@@ -26,6 +26,7 @@ describe("All galeries page test",() => {
             expect(interception.response.statusCode).eq(200)
         })
     })
+    
     it("Test search",() => {
         let searchTerm = "neko"
         cy.intercept({

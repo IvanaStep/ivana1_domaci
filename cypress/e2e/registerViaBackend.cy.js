@@ -30,7 +30,8 @@ describe("Register Form Tests", () => {
         userData.password
       );
       cy.wait("@successfulRegistration").then((interception) => {
-        expect(interception.response.statusCode).eq(200)
+        expect(interception.response.statusCode).eq(200);
+
       cy.visit("/login");
       cy.loginViaBackend();
       });
@@ -59,7 +60,7 @@ describe("Register Form Tests", () => {
       .and("not.be.disabled");
 
     cy.wait("@shortPassRegistration").then((interception) => {
-      expect(interception.response.statusCode).eq(422);
+      expect(interception.response.statusCode).eq(422)
     });
 
     cy.url().should("contain", "/register");
@@ -87,8 +88,9 @@ describe("Register Form Tests", () => {
 
     registerPage.tosCheckbox.check();
 
-    registerPage.tosCheckbox.should("be.checked")
-                            .and("not.be.disabled");
+    registerPage.tosCheckbox
+       .should("be.checked")
+       .and("not.be.disabled");
 
     cy.wait("@emailWithoutDot").then((interception) => {
       expect(interception.response.statusCode).eq(422);
@@ -97,7 +99,7 @@ describe("Register Form Tests", () => {
     cy.url().should("contain", "/register");
   });
 
-  it("Register with password without number",()=>{
+  it("Register with password without number",() => {
     cy.intercept({
       method: "POST",
       url: "https://gallery-api.vivifyideas.com/api/auth/register",
@@ -114,8 +116,9 @@ describe("Register Form Tests", () => {
 
     registerPage.tosCheckbox.check();
 
-    registerPage.tosCheckbox.should("be.checked")
-                            .and("not.be.disabled");
+    registerPage.tosCheckbox
+      .should("be.checked")
+      .and("not.be.disabled");
 
     cy.wait("@passWithoutNumber").then((interception) => {
      expect(interception.response.statusCode).eq(422);
@@ -124,8 +127,8 @@ describe("Register Form Tests", () => {
     cy.url().should("contain", "/register");
 
     registerPage.submitButton
-           .should("be.visible")
-           .and("not.be.disabled");
+      .should("be.visible")
+      .and("not.be.disabled");
 
     registerPage.submitButton.click();
 
